@@ -17,8 +17,11 @@ logger = logging.getLogger("razorguard.app")
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Initialize database tables on startup
-    init_db()
+    # Initialize database tables on startup safely
+    try:
+        init_db()
+    except Exception as e:
+        logger.error(f"Error initializing DB on startup: {e}", exc_info=True)
     yield
 
 

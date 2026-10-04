@@ -21,9 +21,17 @@ class Settings(BaseSettings):
     ALLOWED_ORIGINS: str = "http://localhost:3000,http://127.0.0.1:3000"
 
     # Database: Default SQLite (/tmp on Vercel Serverless), swappable for PostgreSQL
-    DATABASE_URL: str = (
-        "sqlite:////tmp/razorguard.db" if os.environ.get("VERCEL") else "sqlite:///./razorguard.db"
-    )
+    DATABASE_URL: str = "sqlite:///./razorguard.db"
+
+    @field_validator("DATABASE_URL", mode="before")
+    @classmethod
+    def validate_database_url(cls, v: Optional[str]) -> str:
+        if v and v.strip() and v != "sqlite:///./razorguard.db":
+            return v.strip()
+        # In serverless environments (Vercel / AWS Lambda), the only writable filesystem is /tmp
+        if os.environ.get("VERCEL") or os.environ.get("VERCEL_ENV") or os.environ.get("AWS_LAMBDA_FUNCTION_NAME"):
+            return "sqlite:////tmp/razorguard.db"
+        return v or "sqlite:///./razorguard.db"
 
     # OpenAI Configuration (Enrichment only)
     OPENAI_API_KEY: Optional[str] = ""
