@@ -1,0 +1,64 @@
+# Environment variables & secrets (NEVER commit secrets)
+.env
+.env*.local
+.env.development
+.env.production
+backend/.env
+frontend/.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Testing & Cache
+.pytest_cache/
+backend/.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# SQLite Databases & Local Storage
+*.db
+*.sqlite
+*.sqlite3
+backend/razorguard.db
+backend/test_razorguard.db
+
+# Node & Frontend dependencies & builds
+node_modules/
+frontend/node_modules/
+.next/
+frontend/.next/
+out/
+frontend/out/
+build/
+frontend/build/
+.vercel
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo

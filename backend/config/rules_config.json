@@ -1,0 +1,7 @@
+{
+  "thresholds": {
+    "review_min_score": 45,
+    "blocked_min_score": 75
+  },
+  "rules": {}
+}
