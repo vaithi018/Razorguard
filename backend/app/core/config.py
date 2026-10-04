@@ -20,8 +20,10 @@ class Settings(BaseSettings):
     # CORS: Allowed origins list as comma-separated string from environment
     ALLOWED_ORIGINS: str = "http://localhost:3000,http://127.0.0.1:3000"
 
-    # Database: Default SQLite, swappable for PostgreSQL
-    DATABASE_URL: str = "sqlite:///./razorguard.db"
+    # Database: Default SQLite (/tmp on Vercel Serverless), swappable for PostgreSQL
+    DATABASE_URL: str = (
+        "sqlite:////tmp/razorguard.db" if os.environ.get("VERCEL") else "sqlite:///./razorguard.db"
+    )
 
     # OpenAI Configuration (Enrichment only)
     OPENAI_API_KEY: Optional[str] = ""
